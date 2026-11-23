@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Item & Purchase Management System</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div><h1>Item & Purchase Management</h1><p>Items, purchases and stock availability</p></div>
+  </header>
+  <nav class="tabs">
+    <button class="tab active" data-view="itemsView">Items</button>
+    <button class="tab" data-view="typesView">Item Types</button>
+    <button class="tab" data-view="purchaseView">Create Purchase</button>
+    <button class="tab" data-view="purchasesView">Purchase History</button>
+    <button class="tab" data-view="stockView">Stock / Availability</button>
+  </nav>
+  <main>
+    <div id="message" role="status"></div>
+
+    <section id="itemsView" class="view">
+      <div class="section-heading"><div><h2>Item Master</h2><p>Create, update and manage items.</p></div></div>
+      <form id="itemForm" class="panel form-grid">
+        <input type="hidden" id="itemId">
+        <label>Item Name<input id="itemName" required></label>
+        <label>Item Type<select id="itemType" required></select></label>
+        <label>Purchase Date<input id="itemDate" type="date" required></label>
+        <label>Stock Available<input id="itemStock" type="number" min="0" step="1" required></label>
+        <label>Status<select id="itemActive" required><option value="1">Active</option><option value="0">Inactive</option></select></label>
+        <div class="form-actions"><button type="submit" class="primary">Save Item</button><button type="button" id="clearItem" class="secondary">Clear</button></div>
+      </form>
+      <div class="panel table-wrap"><table><thead><tr><th>ID</th><th>Name</th><th>Type</th><th>Purchase Date</th><th>Current Stock</th><th>Availability</th><th>Status</th><th>Actions</th></tr></thead><tbody id="itemsTable"></tbody></table></div>
+    </section>
+
+    <section id="typesView" class="view hidden">
+      <h2>Item Type Management</h2>
+      <form id="typeForm" class="panel inline-form"><input id="typeName" placeholder="Item type name" required><button class="primary">Add Item Type</button></form>
+      <div class="panel table-wrap"><table><thead><tr><th>ID</th><th>Type Name</th><th>Actions</th></tr></thead><tbody id="typesTable"></tbody></table></div>
+    </section>
+
+    <section id="purchaseView" class="view hidden">
+      <h2>Create Purchase</h2>
+      <form id="purchaseForm" class="panel">
+        <label class="date-label">Purchase Date<input id="purchaseDate" type="date" required></label>
+        <div class="line-entry">
+          <label>Active Item<select id="purchaseItem"></select></label>
+          <label>Quantity<input id="purchaseQuantity" type="number" min="1" step="1" value="1"></label>
+          <button type="button" id="addLine" class="secondary">Add Item</button>
+        </div>
+        <h3>Current Order</h3>
+        <div class="table-wrap"><table><thead><tr><th>Item</th><th>Quantity</th><th>Available Stock</th><th>Action</th></tr></thead><tbody id="cartTable"></tbody></table></div>
+        <button class="primary" type="submit">Submit Purchase</button>
+      </form>
+    </section>
+
+    <section id="purchasesView" class="view hidden">
+      <h2>Purchase History</h2>
+      <div class="panel table-wrap"><table><thead><tr><th>Order ID</th><th>Purchase Date</th><th>Item Lines</th><th>Total Quantity</th><th>Action</th></tr></thead><tbody id="purchasesTable"></tbody></table></div>
+      <div id="purchaseDetails"></div>
+    </section>
+
+    <section id="stockView" class="view hidden">
+      <h2>Stock / Availability</h2>
+      <div class="panel table-wrap"><table><thead><tr><th>Item</th><th>Type</th><th>Current Stock</th><th>Availability</th><th>Status</th></tr></thead><tbody id="stockTable"></tbody></table></div>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
